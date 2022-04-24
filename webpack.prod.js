@@ -11,7 +11,7 @@ module.exports = merge(common, {
   plugins: [
     new HtmlWebpackPlugin({
         template: './public/index.html',
-        publicPath: '/dist',
+        publicPath: 'interactive-web/dist',
     }),
     new FileManagerPlugin({
       events: {
