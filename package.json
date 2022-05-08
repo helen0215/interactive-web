@@ -4,11 +4,9 @@
   "description": "My webpack project",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run clean && webpack --node-env=production --config webpack.prod.js",
     "build:dev": "npm run clean && webpack --config webpack.dev.js",
     "build:prod": "npm run clean && webpack --node-env=production --config webpack.prod.js",
-    "watch": "webpack --watch",
     "serve": "webpack serve --config webpack.dev.js",
     "clean": "rm -r -f ./dist ./index.html"
   },
