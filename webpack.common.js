@@ -28,7 +28,7 @@ module.exports = {
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
-      extension: '.js'
+      'images': path.resolve(__dirname, 'public/images'),
     }
   }
 };
