@@ -1,4 +1,4 @@
-export function createCharacter() {
+export function createCharacter({xPos}) {
   const mainElem = document.createElement('div');
   mainElem.classList.add('character');
   mainElem.innerHTML = 
@@ -27,5 +27,6 @@ export function createCharacter() {
         <div class="character-face character-leg-face face-back"></div>
     </div>`;
 
+  mainElem.style.left = `${xPos}%`;
   document.querySelector('.stage').appendChild(mainElem);
 }
