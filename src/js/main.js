@@ -1,4 +1,4 @@
-import { createCaractor } from './Character';
+import { createCharacter } from './Character';
 
 import '@/css/reset.css';
 import '@/css/style.css';
@@ -8,14 +8,12 @@ const barEl = document.querySelector('.progress-bar');
 const stageEl = document.querySelector('.stage');
 const mousePos = {x: 0, y: 0};
 
+// 스크롤 할 수 있는 영역 문서(body) 높이에서 스크롤바 - 보이는 화면
+let maxScrollValue = getMaxScrollValue();
+
 function getMaxScrollValue() {
   return document.body.offsetHeight - window.innerHeight;
 }
-
-createCaractor();
-
-// 스크롤 할 수 있는 영역 문서(body) 높이에서 스크롤바 - 보이는 화면
-let maxScrollValue = getMaxScrollValue();
 
 window.addEventListener("resize", function () {
   maxScrollValue = getMaxScrollValue();
@@ -42,6 +40,12 @@ window.addEventListener('mousemove', function(event) {
 
   // x축을 기준으로 회전 시킬때는 y좌표값을, y축을 기준으로 회전 시킬때는 x좌표값을 사용한다
   stageEl.style.transform = `rotateX(${mousePos.y * 5}deg) rotateY(${mousePos.x * 5}deg)`;
+});
+
+stageEl.addEventListener('click', function(event) {
+  createCharacter({
+    xPos: event.clientX / window.innerWidth * 100
+  });
 });
 
 const useragent = window.navigator.userAgent.toLowerCase();
