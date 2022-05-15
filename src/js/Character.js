@@ -1,5 +1,4 @@
-
-export function createCaractor() {
+export function createCharacter() {
   const mainElem = document.createElement('div');
   mainElem.classList.add('character');
   mainElem.innerHTML = 

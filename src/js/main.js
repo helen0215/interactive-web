@@ -1,4 +1,4 @@
-import { createCaractor } from './Character';
+import { createCharacter } from './Character';
 
 import '@/css/reset.css';
 import '@/css/style.css';
@@ -12,7 +12,7 @@ function getMaxScrollValue() {
   return document.body.offsetHeight - window.innerHeight;
 }
 
-createCaractor();
+createCharacter();
 
 // 스크롤 할 수 있는 영역 문서(body) 높이에서 스크롤바 - 보이는 화면
 let maxScrollValue = getMaxScrollValue();
