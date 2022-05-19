@@ -4,6 +4,22 @@
   }
 }
 
+@keyframes ani-running-leg {
+  from {
+    transform: rotateX(-30deg);
+  } to {
+    transform: rotateX(30deg); 
+  }
+}
+
+@keyframes ani-running-arm {
+  from {
+    transform: rotateX(30deg);
+  } to {
+    transform: rotateX(-30deg); 
+  }
+}
+
 body {
   height: 500vw;
   font-family: 'Apple SD Gothic Neo', 'Roboto', 'Noto Sans KR', NanumGothic, 'Malgun Gothic', sans-serif;
@@ -115,8 +131,8 @@ body {
 /* 캐릭터가 바라보는 방향 */
 .character[data-direction='forward'] { transform: rotateY(180deg); }
 .character[data-direction='backward'] { transform: rotateY(0deg); }
-.character[data-direction='left'] { transform: rotateY(-90deg); }
-.character[data-direction='right'] { transform: rotateY(90deg); }
+.character[data-direction='left'] { transform: rotateY(-95deg); }
+.character[data-direction='right'] { transform: rotateY(85deg); }
 
 .character-face-con {
   position: absolute;
@@ -200,3 +216,8 @@ body {
 }
 .character-leg-left .face-front { background-image: url('images/ilbuni_leg_1.png'); }
 .character-leg-left .face-back { background-image: url('images/ilbuni_leg_0.png'); }
+
+.character.running .character-leg-right { animation: ani-running-leg 0.2s alternate infinite linear; }
+.character.running .character-leg-left { animation: ani-running-leg 0.2s alternate-reverse infinite linear; }
+.character.running .character-arm-right { animation: ani-running-arm 0.2s alternate infinite linear; }
+.character.running .character-arm-left { animation: ani-running-arm 0.2s alternate-reverse infinite linear; }

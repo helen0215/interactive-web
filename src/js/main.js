@@ -1,4 +1,4 @@
-import { createCharacter } from './Character';
+import { Character } from './Character';
 
 import '@/css/reset.css';
 import '@/css/style.css';
@@ -43,7 +43,7 @@ window.addEventListener('mousemove', function(event) {
 });
 
 stageEl.addEventListener('click', function(event) {
-  createCharacter({
+  new Character({
     xPos: event.clientX / window.innerWidth * 100
   });
 });
