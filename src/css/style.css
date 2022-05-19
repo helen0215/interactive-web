@@ -131,8 +131,8 @@ body {
 /* 캐릭터가 바라보는 방향 */
 .character[data-direction='forward'] { transform: rotateY(180deg); }
 .character[data-direction='backward'] { transform: rotateY(0deg); }
-.character[data-direction='left'] { transform: rotateY(-95deg); }
-.character[data-direction='right'] { transform: rotateY(85deg); }
+.character[data-direction='left'] { transform: rotateY(-90deg); }
+.character[data-direction='right'] { transform: rotateY(90deg); }
 
 .character-face-con {
   position: absolute;

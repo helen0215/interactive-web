@@ -44,7 +44,8 @@ window.addEventListener('mousemove', function(event) {
 
 stageEl.addEventListener('click', function(event) {
   new Character({
-    xPos: event.clientX / window.innerWidth * 100
+    xPos: event.clientX / window.innerWidth * 100,
+    speed: Math.random() * 0.5 + 0.2
   });
 });
 

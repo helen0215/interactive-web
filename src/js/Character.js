@@ -15,14 +15,30 @@ const KEYS = {
   ArrowRight: 'ArrowRight'
 };
 
+function getDirectionUnit (direction) {
+  if (direction === DIRECTIONS.LEFT) {
+    return -1;
+  } else if (direction === DIRECTIONS.RIGHT) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
 export class Character {
   #mainElem;
+  #xPos;
+  #speed;
   #lastScrollTop = 0;
   #lastDirection = null;
   #DELAY = 500;
   #runningTimer = null;
+  #moveRaf = null;
+  #isMoving = false;
+  #minXPos = 2;
+  #maxXPos = 88;
   
-  constructor({xPos}) {
+  constructor({xPos, speed = 0.3}) {
     this.#mainElem = document.createElement('div');
     this.#mainElem.classList.add(CHARACTER_STYLES.CHARACTER);
     this.#mainElem.innerHTML = 
@@ -51,9 +67,11 @@ export class Character {
       <div class="character-face character-leg-face face-back"></div>
     </div>`;
 
-    this.#mainElem.style.left = `${xPos}%`;
-    document.querySelector('.stage').appendChild(this.#mainElem);
+    this.#speed = speed;
+    this.#setCharacterXPos(xPos);
     this.#init();
+    
+    document.querySelector('.stage').appendChild(this.#mainElem);
   }
 
   #init() {
@@ -66,18 +84,37 @@ export class Character {
     });
 
     window.addEventListener('keydown', ({key}) => {
+      if ((key !== KEYS.ArrowLeft && key !== KEYS.ArrowRight) || this.#isMoving) {
+        return;
+      }
+
+      this.#isMoving = true;
+
       if (key === KEYS.ArrowLeft) {
         this.#setDirection(DIRECTIONS.LEFT);
       } else if (key === KEYS.ArrowRight) {
         this.#setDirection(DIRECTIONS.RIGHT);
       }
       this.#setRunning(true);
+      this.#move();
     });
 
     window.addEventListener('keyup', () => {
       this.#setRunning(false);
+      this.#clearMoveRaf();
+      this.#isMoving = false;
     });
   }
+
+  #setCharacterXPos(xPos) {
+    this.#xPos = xPos;
+    if (this.#xPos < this.#minXPos) {
+      this.#xPos = this.#minXPos;
+    } else if (this.#xPos > this.#maxXPos) {
+      this.#xPos = this.#maxXPos;   
+    } 
+    this.#mainElem.style.left = `${this.#xPos}%`;
+  } 
 
   #setRunning(isRunning) {
     if (isRunning) {
@@ -106,10 +143,22 @@ export class Character {
     }
   }
 
+  #clearMoveRaf() {
+    if (this.#moveRaf) {
+      cancelAnimationFrame(this.#moveRaf);
+      this.#moveRaf = null;
+    }
+  }
+
   #setDirection(direction) {
     if (this.#lastDirection !== direction) {
       this.#mainElem.dataset.direction = direction;
       this.#lastDirection = direction;
     }
+  }
+
+  #move() {
+    this.#setCharacterXPos(this.#xPos + (getDirectionUnit(this.#lastDirection) * this.#speed));
+    this.#moveRaf = requestAnimationFrame(() => this.#move());
   }
 }
